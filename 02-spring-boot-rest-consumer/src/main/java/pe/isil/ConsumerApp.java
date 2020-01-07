@@ -7,9 +7,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
 import org.springframework.web.client.RestTemplate;
 import pe.isil.model.Product;
 
+import java.net.URI;
 import java.util.List;
 
 @SpringBootApplication
@@ -31,7 +33,8 @@ public class ConsumerApp implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        addProduct();
+        //addProduct();
+        updateProduct();
         listProducts();
     }
 
@@ -47,6 +50,23 @@ public class ConsumerApp implements CommandLineRunner {
         System.out.println("productResponse = " + productResponse);
 
     }
+
+    //actualizar
+    private void updateProduct(){
+        Product product = new Product(102, "SKU200","Zapatos");
+        HttpEntity<Product> request = new HttpEntity<>(product);
+
+        String UPDATE_ENDPOINT =  ENDPOINT +"/" + product.getId();
+        restTemplate.exchange(UPDATE_ENDPOINT, HttpMethod.PUT, request, Void.class);
+
+    }
+
+    //delete
+    private void deleteProduct(){
+        String DELETE_URL = ENDPOINT +"/"+ 102;
+        restTemplate.delete(DELETE_URL);
+    }
+
 
     private void listProducts(){
         List products = restTemplate.getForObject(ENDPOINT, List.class);
