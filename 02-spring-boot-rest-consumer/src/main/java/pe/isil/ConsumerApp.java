@@ -33,9 +33,10 @@ public class ConsumerApp implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        //addProduct();
+        addProduct();
         updateProduct();
         listProducts();
+        deleteProduct();
     }
 
     private void addProduct(){
