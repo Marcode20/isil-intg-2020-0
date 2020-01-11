@@ -10,7 +10,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Data
 @Entity
-@Table
+@Table(name = "t_product")
 public class Product {
 
     @Id
@@ -20,5 +20,9 @@ public class Product {
     private String sku;
     @Column(nullable = false)
     private String name;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "supplier_id")
+    private Supplier supplier;
 
 }
