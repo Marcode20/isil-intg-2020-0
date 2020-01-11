@@ -1,7 +1,11 @@
 package pe.isil.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pe.isil.model.Product;
 import pe.isil.model.Supplier;
+import pe.isil.repository.ProductRepository;
+import pe.isil.repository.SupplierRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,32 +13,34 @@ import java.util.List;
 @Service
 public class SupplierService {
 
-    //DB in memory
-    List<Supplier> supplierList = new ArrayList<>();
+    @Autowired
+    SupplierRepository supplierRepository;
+
+    @Autowired
+    ProductRepository productRepository;
 
     public void create(Supplier supplier){
-        supplierList.add(supplier);
+        supplierRepository.save(supplier);
     }
 
     public void update(Supplier supplier){
-        Supplier currentSupplier = findById(supplier.getRuc());
-        int index = supplierList.indexOf(currentSupplier);
-        supplierList.set(index, supplier);
+        supplierRepository.save(supplier);
     }
 
     public void delete(Supplier supplier){
-        supplierList.remove(supplier);
+        supplierRepository.delete(supplier);
     }
 
     public List<Supplier> findAll(){
-        return supplierList;
+        return supplierRepository.findAll();
     }
 
     public Supplier findById(String ruc){
-        return supplierList.stream()
-                .filter( e -> ruc.equalsIgnoreCase(e.getRuc()))
-                .findFirst()
+        return supplierRepository.findById(ruc)
                 .orElseGet(null);
     }
 
+    public List<Product> findSupplierId(String ruc) {
+        return productRepository.findBySupplierRuc(ruc);
+    }
 }
