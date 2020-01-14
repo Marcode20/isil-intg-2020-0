@@ -11,4 +11,7 @@ public interface ProductRepository
         extends JpaRepository<Product, Integer> {
 
     List<Product> findBySupplierRuc(String ruc);
+
+    List<Product> findBySupplierName(String name);
+
 }

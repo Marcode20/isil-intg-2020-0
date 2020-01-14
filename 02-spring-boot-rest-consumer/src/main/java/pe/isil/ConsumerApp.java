@@ -42,7 +42,7 @@ public class ConsumerApp implements CommandLineRunner {
     private void addProduct(){
 
         Product product = new Product();
-        product.setId(104);
+        product.setId(105);
         product.setSku("SKU00104");
         product.setName("corbatas");
 
@@ -54,7 +54,7 @@ public class ConsumerApp implements CommandLineRunner {
 
     //actualizar
     private void updateProduct(){
-        Product product = new Product(102, "SKU200","Zapatos");
+        Product product = new Product(105, "SKU200","Zapatos");
         HttpEntity<Product> request = new HttpEntity<>(product);
 
         String UPDATE_ENDPOINT =  ENDPOINT +"/" + product.getId();
@@ -64,7 +64,7 @@ public class ConsumerApp implements CommandLineRunner {
 
     //delete
     private void deleteProduct(){
-        String DELETE_URL = ENDPOINT +"/"+ 102;
+        String DELETE_URL = ENDPOINT +"/"+ 105;
         restTemplate.delete(DELETE_URL);
     }
 
