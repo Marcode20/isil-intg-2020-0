@@ -12,6 +12,6 @@ public interface ProductRepository
 
     List<Product> findBySupplierRuc(String ruc);
 
-    List<Product> findBySupplierName(String name);
+    List<Product> findBySku(String sku);
 
 }
